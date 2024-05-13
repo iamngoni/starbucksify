@@ -1,25 +1,36 @@
-/// A silly package that converts a string to a Starbucks-like string.
+import 'dart:math';
+
+/// A class that mimics the often humorous misspelling of names on Starbucks cups.
 class Starbucksify {
-  static const Map<String, String> _starbucksMisspelledLetters = {
-    'a': 'e',
-    'e': 'a',
-    'i': 'y',
-    'o': 'u',
-    'u': 'o',
-    'A': 'E',
-    'E': 'A',
-    'I': 'Y',
-    'O': 'U',
-    'U': 'O',
+  static final Random _random = Random();
+
+  static const Map<String, List<String>> _starbucksMisspellings = {
+    'a': ['e', 'a', 'aa', 'ar'],
+    'e': ['a', 'i', 'ee', 'ea'],
+    'i': ['y', 'ie', 'ee', 'ai'],
+    'o': ['u', 'oo', 'oa', 'o'],
+    'u': ['o', 'uu', 'ue', 'u'],
+    'A': ['E', 'A', 'Aa', 'Ar'],
+    'E': ['A', 'I', 'Ee', 'Ea'],
+    'I': ['Y', 'Ie', 'Ee', 'Ai'],
+    'O': ['U', 'Oo', 'Oa', 'O'],
+    'U': ['O', 'Uu', 'Ue', 'U'],
   };
 
-  /// Converts [letter] to a Starbucks-like string.
+  /// Converts a single letter with a humorous misspelling.
   static String _convert(String letter) {
-    return _starbucksMisspelledLetters[letter] ?? letter;
+    if (_starbucksMisspellings.containsKey(letter)) {
+      final List<String> replacements = _starbucksMisspellings[letter] ?? [];
+      return replacements[_random.nextInt(replacements.length)];
+    }
+    return letter;
   }
 
-  /// Converts [text] to a Starbucks-like string.
+  /// Converts a string to a humorously misspelled version, similar to a Starbucks cup.
   static String starbucksify(String text) {
-    return text.split('').map(_convert).join();
+    return text
+        .split('')
+        .map((char) => _random.nextBool() ? _convert(char) : char)
+        .join();
   }
 }
