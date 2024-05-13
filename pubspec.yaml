@@ -1,7 +1,7 @@
 name: starbucksify
-description: A Very Good Project created by Very Good CLI.
+description: A silly package that converts a string to a Starbucks-like string.
 version: 0.1.0+1
-publish_to: 'pub.dev'
+repository: https://github.cim/iamngoni/starbucksify
 
 environment:
   sdk: "^3.3.0"
